@@ -1,3 +1,4 @@
+--DELIVERABLE -1
 SELECT e.emp_no,
 		e.first_name,
 		e.last_name,
@@ -52,5 +53,20 @@ WHERE (de.to_date = '9999-01-01')
 AND (e.birth_date BETWEEN '1965-01-01'AND '1965-12-31')
 ORDER BY emp_no
 
+--Deliverable 3
+
+--Total number of employees retiring
+SELECT COUNT(title) 
+FROM unique_titles
+
+-- No of employess eligibile for mentorship by each title
+SELECT COUNT(title), title
+FROM mentorship_eligibilty	
+GROUP BY title 
+ORDER BY count(title) DESC;
+
+--Total number of employees elibile for mentorship
+SELECT COUNT(title)
+FROM mentorship_eligibilty;
 
 
