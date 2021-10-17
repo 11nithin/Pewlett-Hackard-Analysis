@@ -86,13 +86,23 @@ ORDER BY ut.emp_no, de.to_date DESC;
 
 --Employess retiring by tiles and department
 SELECT COUNT(title),title, dept_name
+INTO retiring_title_by_department
 FROM department_unique_title
 GROUP BY dept_name, title
-ORDER BY COUNT(title) DESC;
+ORDER BY dept_name ASC;
 
 -- Total number of emplyees retiring from each department
 SELECT COUNT(emp_no), dept_name
 FROM department_unique_title
 GROUP BY dept_name
 ORDER BY COUNT(title) DESC;
+
+
+--Qualified retiring emplyees for training
+SELECT count(ru.title),ru.title, ru.dept_name
+FROM department_unique_title AS ru
+WHERE ru.title IN ( 'Senior Staff', 'Manager','Senior Engineer')
+GROUP BY ru.dept_name, ru.title
+ORDER BY COUNT(ru.title) DESC;
+
 
