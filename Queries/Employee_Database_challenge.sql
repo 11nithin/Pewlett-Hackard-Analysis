@@ -57,7 +57,7 @@ ORDER BY emp_no
 
 --Total number of employees retiring
 SELECT COUNT(title) 
-FROM unique_titles
+FROM unique_titles;
 
 -- No of employess eligibile for mentorship by each title
 SELECT COUNT(title), title
@@ -69,4 +69,30 @@ ORDER BY count(title) DESC;
 SELECT COUNT(title)
 FROM mentorship_eligibilty;
 
+--Number of employees retiring by department
+SELECT ut.emp_no,
+	ut.first_name,
+	ut.last_name,
+	ut.title,
+	d.dept_name
+INTO department_unique_title
+FROM unique_titles as ut
+INNER JOIN dept_emp as de
+ON (ut.emp_no = de.emp_no)
+INNER JOIN departments as d
+ON (d.dept_no = de.dept_no)
+ORDER BY ut.emp_no, de.to_date DESC;
+
+
+--Employess retiring by tiles and department
+SELECT COUNT(title),title, dept_name
+FROM department_unique_title
+GROUP BY dept_name, title
+ORDER BY COUNT(title) DESC;
+
+-- Total number of emplyees retiring from each department
+SELECT COUNT(emp_no), dept_name
+FROM department_unique_title
+GROUP BY dept_name
+ORDER BY COUNT(title) DESC;
 
